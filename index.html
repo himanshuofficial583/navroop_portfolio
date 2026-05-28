@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Editing Portfolio</title>
     <style>
-        /* Global Styles & Reset */
+        /* Reset and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -14,121 +14,331 @@
         }
 
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-            color: #f8fafc;
-            min-height: 100vh;
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Container helper */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navbar / Header Logo */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 40px;
+        }
+        
+        .nav-container {
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
         }
 
-        /* Header Section */
-        header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        header h1 {
-            font-size: 2.5rem;
+        .logo {
+            font-size: 1.5rem;
             font-weight: 800;
             background: linear-gradient(to right, #38bdf8, #818cf8);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
         }
 
-        header p {
+        /* Intro Section */
+        .intro-section {
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+        }
+
+        .intro-section::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: 300px;
+            background: rgba(56, 189, 248, 0.15);
+            filter: blur(100px);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        .intro-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .intro-title span {
+            background: linear-gradient(to right, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .intro-desc {
+            font-size: 1.2rem;
             color: #94a3b8;
-            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
         }
 
-        /* Pricing Cards Container */
-        .pricing-container {
+        .scroll-btn {
+            background: linear-gradient(to right, #38bdf8, #3b82f6);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 4px 14px rgba(56, 189, 248, 0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-block;
+        }
+
+        .scroll-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.5);
+        }
+
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 80px 0 40px 0;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 4px;
+            background: #38bdf8;
+            margin: 10px auto 0 auto;
+            border-radius: 2px;
+        }
+
+        /* Categories Section */
+        .category-block {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            align-items: center;
+            transition: border-color 0.3s;
+        }
+
+        .category-block:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .category-info {
+            flex: 1 1 450px;
+        }
+
+        .cat-tag {
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .category-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #f8fafc;
+        }
+
+        .category-info p {
+            color: #94a3b8;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .features-inline {
+            list-style: none;
+        }
+
+        .features-inline li {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            color: #cbd5e1;
+        }
+
+        .features-inline li::before {
+            content: "✓";
+            color: #34d399;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .category-video {
+            flex: 1 1 350px;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #1e293b;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* SVG Video Placeholder or Link Overlay */
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: #e2e8f0;
+            padding: 20px;
+            background: linear-gradient(45deg, #1e293b, #0f172a);
+            transition: background 0.3s;
+        }
+
+        .video-placeholder:hover {
+            background: linear-gradient(45deg, #27374d, #111827);
+        }
+
+        .play-icon {
+            width: 60px;
+            height: 60px;
+            background: #38bdf8;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .video-placeholder:hover .play-icon {
+            transform: scale(1.1);
+            background: #818cf8;
+            box-shadow: 0 0 20px rgba(129, 140, 248, 0.6);
+        }
+
+        .play-icon svg {
+            fill: #fff;
+            width: 24px;
+            height: 24px;
+            margin-left: 4px;
+        }
+
+        .video-placeholder span {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #38bdf8;
+        }
+        
+        .video-placeholder p {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 5px;
+        }
+
+        /* Pricing Section Layout */
+        .pricing-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 30px;
             justify-content: center;
-            max-width: 1200px;
-            width: 100%;
+            margin-bottom: 80px;
         }
 
-        /* Single Card Style */
-        .card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .price-card {
+            background: rgba(30, 41, 59, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 20px;
-            padding: 35px 25px;
-            width: 320px;
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 350px;
             text-align: center;
             transition: all 0.3s ease;
+            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            position: relative;
-            overflow: hidden;
         }
 
-        /* Hover Effect */
-        .card:hover {
-            transform: translateY(-10px);
+        .price-card:hover {
+            transform: translateY(-8px);
             border-color: #38bdf8;
-            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.15);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.15);
         }
 
-        /* Best Value / High Quality Card Special Style */
-        .card.premium {
+        .price-card.featured {
             border-color: #818cf8;
-            box-shadow: 0 10px 30px rgba(129, 140, 248, 0.1);
+            background: rgba(30, 41, 59, 0.8);
         }
         
-        .card.premium:hover {
-            box-shadow: 0 20px 40px rgba(129, 140, 248, 0.25);
+        .price-card.featured:hover {
             border-color: #a5b4fc;
+            box-shadow: 0 15px 30px rgba(129, 140, 248, 0.25);
         }
 
-        .badge {
+        .pro-badge {
             position: absolute;
             top: 15px;
-            right: -30px;
-            background: #818cf8;
-            color: #fff;
+            right: 20px;
+            background: linear-gradient(to right, #818cf8, #6366f1);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
             font-size: 0.75rem;
-            font-weight: bold;
-            padding: 4px 30px;
-            transform: rotate(45deg);
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
-        /* Card Elements */
-        .tier-name {
-            font-size: 1.5rem;
+        .tier-title {
+            font-size: 1.4rem;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             color: #f1f5f9;
         }
 
-        .price {
-            font-size: 2.5rem;
+        .tier-price {
+            font-size: 3rem;
             font-weight: 800;
             color: #38bdf8;
-            margin-bottom: 25px;
+            margin: 20px 0;
         }
 
-        .price span {
+        .tier-price span {
             font-size: 1rem;
-            color: #94a3b8;
+            color: #64748b;
             font-weight: 400;
         }
 
-        .features-list {
+        .card-features {
             list-style: none;
             text-align: left;
             margin-bottom: 35px;
         }
 
-        .features-list li {
+        .card-features li {
             margin-bottom: 12px;
             color: #cbd5e1;
             font-size: 0.95rem;
@@ -136,97 +346,219 @@
             align-items: center;
         }
 
-        /* Checkmark icon using CSS */
-        .features-list li::before {
+        .card-features li::before {
             content: "✓";
             color: #34d399;
-            font-weight: bold;
             margin-right: 10px;
-            font-size: 1.1rem;
+            font-weight: bold;
         }
 
-        /* Button */
-        .cta-btn {
-            background: linear-gradient(to right, #38bdf8, #3b82f6);
+        .action-btn {
+            width: 100%;
+            background: #1e293b;
             color: white;
-            border: none;
-            padding: 12px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
             border-radius: 10px;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.2s;
+            transition: all 0.2s;
             text-decoration: none;
+            display: inline-block;
         }
 
-        .card.premium .cta-btn {
+        .action-btn:hover {
+            background: #38bdf8;
+            color: #0f172a;
+            border-color: #38bdf8;
+        }
+
+        .price-card.featured .action-btn {
             background: linear-gradient(to right, #818cf8, #6366f1);
+            border: none;
         }
 
-        .cta-btn:hover {
+        .price-card.featured .action-btn:hover {
             opacity: 0.9;
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #475569;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 768px) {
+            .intro-title {
+                font-size: 2.2rem;
+            }
+            .category-block {
+                flex-direction: column;
+                padding: 20px;
+            }
+            .category-video {
+                width: 100%;
+                max-width: 100%;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Video Editing Services</h1>
-        <p>Apni video ke liye sahi plan chunein aur quality next level karein</p>
-    </header>
-
-    <div class="pricing-container">
-
-        <!-- Category 1: Basic -->
-        <div class="card">
-            <div>
-                <div class="tier-name">Basic Edit</div>
-                <div class="price">₹30 <span>/ video</span></div>
-                <ul class="features-list">
-                    <li>Basic Cuts & Trimming</li>
-                    <li>Background Music Integration</li>
-                    <li>Standard Resolution Output</li>
-                    <li>Quick Delivery</li>
-                </ul>
-            </div>
-            <button class="cta-btn">Order Now</button>
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">EditorPortfolio</div>
         </div>
+    </nav>
 
-        <!-- Category 2: Standard -->
-        <div class="card">
-            <div>
-                <div class="tier-name">Standard Edit</div>
-                <div class="price">₹60 <span>/ video</span></div>
-                <ul class="features-list">
-                    <li>Clean Cuts & Trimming</li>
-                    <li>Immersive Sound Effects (SFX)</li>
-                    <li>Perfect Background Music Sync</li>
-                    <li>Smooth Transitions</li>
-                    <li>Color Correction (Basic)</li>
-                </ul>
-            </div>
-            <button class="cta-btn">Order Now</button>
-        </div>
+    <div class="container">
 
-        <!-- Category 3: Premium (High Quality) -->
-        <div class="card premium">
-            <div class="badge">PRO</div>
-            <div>
-                <div class="tier-name">Premium Edit</div>
-                <div class="price">₹120 <span>/ video</span></div>
-                <ul class="features-list">
-                    <li>High-Quality Custom Animations</li>
-                    <li>Advanced Sound Design & SFX</li>
-                    <li>Premium Background Music</li>
-                    <li>Seamless Transitions & Effects</li>
-                    <li>Motion Graphics & Text Titles</li>
-                    <li>Color Grading & Enhancements</li>
-                    <li>Maximum Quality Render (4K/1080p)</li>
-                </ul>
+        <section class="intro-section">
+            <h1 class="intro-title">Professional <span>Video Editing</span> Services</h1>
+            <p class="intro-desc">Hey there! Main aapki videos ko engageable, clean aur high-quality banata hoon. Client satisfaction meri priority hai. Niche meri categories aur samples dekhein aur apna perfect plan select karein!</p>
+            <a href="#samples" class="scroll-btn">View My Work</a>
+        </section>
+
+        <section id="samples">
+            <h2 class="section-title">Work Categories & Video Samples</h2>
+
+            <div class="category-block">
+                <div class="category-info">
+                    <span class="cat-tag">Tier 01</span>
+                    <h3>Basic Edit</h3>
+                    <p>Agar aapko simple cuts, clean trimming aur bina kisi her-pher ke ek pyara sa background music chahiye, toh yeh category aapke liye best hai. Shorts, reels ya simple vlogs ke liye perfect starter option.</p>
+                    <ul class="features-inline">
+                        <li>Smooth basic cuts and trimming</li>
+                        <li>High-quality background music addition</li>
+                        <li>Perfect for fast-paced short content</li>
+                    </ul>
+                </div>
+                <div class="category-video">
+                    <a href="https://www.youtube.com" target="_blank" class="video-placeholder">
+                        <div class="play-icon">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <span>Watch Basic Edit Sample</span>
+                        <p>Click karne par sample video open hogi</p>
+                    </a>
+                </div>
             </div>
-            <button class="cta-btn">Order Now</button>
-        </div>
+
+            <div class="category-block">
+                <div class="category-info">
+                    <span class="cat-tag">Tier 02</span>
+                    <h3>Standard Edit (SFX & Transitions)</h3>
+                    <p>Is category me video ko engaging banane ke liye sound effects (SFX) aur seamless transitions ka use kiya jata hai. Background music ko video ke cuts ke sath thik se sync kiya jata hai jo viewer ka retention badhata hai.</p>
+                    <ul class="features-inline">
+                        <li>Advanced transitions (Zoom, Glitch, Fade)</li>
+                        <li>Immersive sound effects (SFX) & audio syncing</li>
+                        <li>Dynamic text overlays & basic typography</li>
+                    </ul>
+                </div>
+                <div class="category-video">
+                    <a href="https://www.youtube.com" target="_blank" class="video-placeholder">
+                        <div class="play-icon">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <span>Watch Standard Edit Sample</span>
+                        <p>Click karne par sample video open hogi</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="category-block">
+                <div class="category-info">
+                    <span class="cat-tag">Tier 03</span>
+                    <h3>Premium High-Quality Edit</h3>
+                    <p>Yeh hamari ultimate category hai. Isme advanced level keyframe animations, high-tier sound design, custom motion graphics, color grading, text effects aur baki saari premium cheezein add ki jayengi jo video ko ekdum professional dynamic look dengi.</p>
+                    <ul class="features-inline">
+                        <li>High-Quality custom animations & keyframing</li>
+                        <li>Advanced level sound design & mix SFX</li>
+                        <li>Motion Graphics, text highlights & tracking</li>
+                        <li>Cinematic color grading & full quality enhancement</li>
+                    </ul>
+                </div>
+                <div class="category-video">
+                    <a href="https://www.youtube.com" target="_blank" class="video-placeholder">
+                        <div class="play-icon">
+                            <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <span>Watch Premium Edit Sample</span>
+                        <p>Click karne par sample video open hogi</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Simple & Transparent Pricing</h2>
+            
+            <div class="pricing-grid">
+                
+                <div class="price-card">
+                    <div>
+                        <div class="tier-title">Basic Edit</div>
+                        <div class="tier-price">₹30<span>/video</span></div>
+                        <ul class="card-features">
+                            <li>Basic Cuts & Trimming</li>
+                            <li>Background Music</li>
+                            <li>Standard Resolution</li>
+                            <li>1 Revision Included</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="action-btn">Choose Basic</a>
+                </div>
+
+                <div class="price-card">
+                    <div>
+                        <div class="tier-title">Standard Edit</div>
+                        <div class="tier-price">₹60<span>/video</span></div>
+                        <ul class="card-features">
+                            <li>Cuts + Transitions</li>
+                            <li>Immersive SFX</li>
+                            <li>Perfect Music Sync</li>
+                            <li>2 Revisions Included</li>
+                            <li>HD Quality Delivery</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="action-btn">Choose Standard</a>
+                </div>
+
+                <div class="price-card featured">
+                    <div class="pro-badge">BEST VALUE</div>
+                    <div>
+                        <div class="tier-title">Premium Edit</div>
+                        <div class="tier-price">₹120<span>/video</span></div>
+                        <ul class="card-features">
+                            <li>High Quality Animations</li>
+                            <li>Advanced SFX & Sound Design</li>
+                            <li>Motion Graphics & Titles</li>
+                            <li>Cinematic Color Grading</li>
+                            <li>Unlimited Revisions</li>
+                            <li>4K/1080p Ultra Output</li>
+                        </ul>
+                    </div>
+                    <a href="#" class="action-btn">Go Premium</a>
+                </div>
+
+            </div>
+        </section>
 
     </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Video Editor Portfolio. All rights reserved.</p>
+        </div>
+    </footer>
 
 </body>
 </html>
